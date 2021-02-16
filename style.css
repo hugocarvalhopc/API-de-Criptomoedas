@@ -1,0 +1,25 @@
+body {
+    background-image: url(fundo.jpg);
+    background-size: cover;
+}
+
+h5 {
+ color: rgb(23, 120, 247);
+}
+
+p {
+ color: rgba(255, 166, 0, 0.938);
+}
+
+
+.media img {
+    border-radius: 500px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #ffff;
+}
+
+.historico {
+   color: black;
+}

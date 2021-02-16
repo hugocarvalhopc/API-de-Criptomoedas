@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CoinMarketCap</title>
+        <!--Bootstrap-->
+        <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+        <!--Css-->
+        <link rel="stylesheet" href="style.css">
+        <meta charset="utf-8">       
+    </head>
+    <body>
+            <header>
+                <nav class="navbar navbar-expand-sm bg-info navbar-light">
+                    <div class="container">
+
+                        <a href="#" class="navbar-brand">
+                            <p class="text-white">CoinMarketCap</p>
+                        </a>
+
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#principal">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" id="principal">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Bitcoin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Litecoin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Namecoin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">Terracoin</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </nav>
+            </header>
+        
+          <section>
+            <div class="d-flex p-3 bd-highlight">
+                <div id='coins'></div>
+            </div>
+          </section>
+
+        <script type="text/javascript">
+            //My api key
+            var apikey = {
+                key: 'a223d29a-5979-493e-86a7-3d5809470fc1'
+            }
+
+        //GET Fetch Requisition
+        fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=' +
+                apikey.key)
+                .then((response) => {
+                    if(!response.ok) throw new Error('Erro ao executar a requisição, status ' + response.status);
+                    return response.json();
+            })
+            .then((api) => {
+                
+                var texto = "";
+                // Get 10 coins and symbols 
+                for(let i = 0; i < 10; i++){
+
+
+
+                //Show API information
+
+                   texto = texto + `
+                  
+                    <div class="media">
+                        <img src="coin.jpg" class="align-self-center mr-3" alt="coin" width="100" height="60">
+                        <div class="media-body">
+                        <h5 class="mt-2">${api.data[i].name}</h5>
+                        <p>${api.data[i].symbol}</p>
+                        <p class="historico">${api.data[i].first_historical_data}
+                        </div>
+                    </div>
+               
+                    `;
+
+                    document.getElementById("coins").innerHTML = texto;
+                    
+                }
+            })
+            .catch((error) => {
+                console.error(error.message);
+            });
+        </script>
+    </body>
+</html>
